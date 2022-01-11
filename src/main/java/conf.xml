@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <configuration>
+    <!-- 这是引入数据库的配置信息  以后数据库的配置信息不会在放到xml中了 -->
+     <properties resource="config.properties"/>
+     <!-- 这是为mapper.xml文件中的实体的全称起别名 -->
+     <typeAliases>
+     <!-- 这是为某一个类设置别名 -->
+        <!-- <typeAlias type="com.ytc.model.Movie" alias="movie"/> -->
+        <!-- 这是为当前这个包下的所有的类设置别名 -->
+        <package name="com.ytc.model"/>
+     </typeAliases>
+     <!-- 当前默认为开发环境 -->
+     <environments default="development">
+         <environment id="development">
+             <!-- 连接类型为  jdbc -->
+             <transactionManager type="JDBC" />
+             <!-- 配置数据库连接信息 -->
+             <dataSource type="POOLED">
+                 <!-- 数据库的驱动信息 -->
+                 <property name="driver" value="${driver}" />
+                 <!-- 数据库的路径 -->
+                 <property name="url" value="${url}" />
+                 <!-- 数据库用户名配置 -->
+                 <property name="username" value="${username}" />
+                 <!-- 数据库密码配置 -->
+                 <property name="password" value="${password}" />
+             </dataSource>
+         </environment>
+     </environments>
+     <!-- mybatis需要注册文件 -->
+     <mappers>
+     <!-- 这是注册文件的标签  需要把 BookMapper.xml注册到mybatis中 
+               我们的文件是在  com.ytc.mapping.BookMapper.xml  而resources属性不是识别.而是识别/
+     -->
+         <mapper resource="com/ytc/mapping/BookMapper.xml"/> 
+         <mapper resource="com/ytc/mapping/AuthorMapper.xml"/> 
+       <!-- 我们现在使用的是接口注解的方式进行增删改查的 -->
+  
+     </mappers>
+      
+ </configuration>
